@@ -1,0 +1,25 @@
+{
+  "builders": [{
+    "type": "docker",
+    "image": "ubuntu:18.04",
+    "commit": true,
+    "changes": [
+      "ENTRYPOINT /bin/bash"
+    ]}],
+
+  "provisioners": [
+    {
+      "type": "shell",
+      "inline": [
+        "apt update",
+        "apt install -y software-properties-common",
+        "add-apt-repository ppa:deadsnakes/ppa",
+        "apt install -y python3.7"
+      ]
+    },
+    {
+      "type": "ansible",
+      "playbook_file": "playbook.yml"
+    }
+  ]
+}
